@@ -1,0 +1,52 @@
+[theme="cesium"] {
+  --skin: #29292e;
+  --contrast-0p: #1d1d21;
+  --contrast-70p: #393942;
+  --contrast-90p: #565664;
+  --contrast-100p: #dfdfe0;
+  --blue: #0075db;
+  --blue-sec: #0460b1;
+  --red: #ff444c;
+  --red-sec: #ca343c;
+  --white: #ffffff;
+  --active: #010244;
+}
+
+.container {
+  height: 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.container:hover {
+  background-color: var(--active);
+  /* border-top: 1px solid var(--contrast-70p);
+  border-bottom: 1px solid var(--contrast-70p); */
+}
+
+.label-color {
+  border-radius: 50%;
+  height: 2rem;
+  width: 2rem;
+}
+
+.materials-details {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+
+.materials-title {
+  font-size: 18px;
+  color: var(--contrast-100p);
+  margin: 0;
+}
+
+.materials-subtitle {
+  margin: 0;
+  font-size: 12px;
+  color: var(--contrast-100p);
+}
