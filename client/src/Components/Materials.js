@@ -49,6 +49,17 @@ export class Materials extends Component {
       });
   };
 
+  api_updateMaterial = (material) => {
+    axios
+      .post("/api/material/update", material)
+      .then(() => {
+        this.api_getAllMaterials();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   setCurrentItem = (material) => {
     this.setState({
       current_material: material,
@@ -69,6 +80,7 @@ export class Materials extends Component {
   handleChange = (event) => {
     this.setState({
       current_material: {
+        ...this.state.current_material,
         _id: this.state.current_material._id,
         [event.target.name]: event.target.value,
       },
@@ -76,7 +88,7 @@ export class Materials extends Component {
   };
 
   handleSave = () => {
-    // Call API
+    this.api_updateMaterial(this.state.current_material);
   };
 
   render() {
@@ -91,7 +103,7 @@ export class Materials extends Component {
                 <FaPlus />
                 <p style={{ marginLeft: "0.5rem" }}>Add</p>
               </button>
-              <button className="delete-btn">
+              <button className="delete-btn" disabled = {this.state.data.length === 0 ? true : false}>
                 <FaTrash />
                 <p style={{ marginLeft: "0.5rem" }}>Delete</p>
               </button>
@@ -166,7 +178,9 @@ export class Materials extends Component {
                         onChange={this.handleChange}
                         value={current_material.cost}
                       />
-                      <button className="save-btn">Save</button>
+                      <button className="save-btn" onClick={this.handleSave}>
+                        Save
+                      </button>
                     </div>
                   </>
                 )}

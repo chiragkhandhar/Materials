@@ -31,3 +31,25 @@ exports.addMaterial = (request, response) => {
       response.status(500).json({ code: "INTERNAL SERVER ERROR" });
     });
 };
+
+// Update a Material
+exports.updateMaterial = (request, response) => {
+  Material.updateOne(
+    { _id: request.body._id },
+    {
+      $set: {
+        name: request.body.name,
+        volume: request.body.volume,
+        delDate: request.body.delDate,
+        color: request.body.color,
+        cost: request.body.cost,
+      },
+    }
+  )
+    .then((obj) => {
+      response.status(200).json({ code: "SUCCESS"});
+    })
+    .catch((err) => {
+      response.status(500).json({ code: "INTERNAL SERVER ERROR" });
+    });
+};
