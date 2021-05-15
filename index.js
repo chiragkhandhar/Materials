@@ -5,6 +5,7 @@ const {
   getAllMaterials,
   addMaterial,
   updateMaterial,
+  deleteMaterial,
 } = require("./routes/materials");
 
 // Connection
@@ -16,3 +17,4 @@ app.listen(port, () => {
 app.get("/api/materials", getAllMaterials);
 app.post("/api/material", addMaterial);
 app.post("/api/material/update", updateMaterial);
+app.post("/api/material/delete", deleteMaterial);

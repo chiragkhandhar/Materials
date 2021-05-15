@@ -53,3 +53,15 @@ exports.updateMaterial = (request, response) => {
       response.status(500).json({ code: "INTERNAL SERVER ERROR" });
     });
 };
+
+// Delete an Material
+exports.deleteMaterial = (request, response) => {
+    Material.deleteOne({ _id: request.body._id })
+      .then(() => {
+        response.status(200).json({ code: "SUCCESS" });
+      })
+      .catch((err) => {
+        console.log(err);
+        response.status(500).json({ code: "INTERNAL SERVER ERROR" });
+      });
+  };

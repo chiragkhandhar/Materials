@@ -60,6 +60,18 @@ export class Materials extends Component {
       });
   };
 
+  api_deleteMaterial = (material) => {
+    axios
+      .post("/api/material/delete", material)
+      .then((res) => {
+        this.api_getAllMaterials();
+        this.setCurrentItem({});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   setCurrentItem = (material) => {
     this.setState({
       current_material: material,
@@ -91,6 +103,10 @@ export class Materials extends Component {
     this.api_updateMaterial(this.state.current_material);
   };
 
+  handleDelete = () => {
+    this.api_deleteMaterial(this.state.current_material);
+  };
+
   render() {
     const { current_material } = this.state;
     return (
@@ -103,7 +119,11 @@ export class Materials extends Component {
                 <FaPlus />
                 <p style={{ marginLeft: "0.5rem" }}>Add</p>
               </button>
-              <button className="delete-btn" disabled = {this.state.current_material._id ? false : true}>
+              <button
+                className="delete-btn"
+                onClick={this.handleDelete}
+                disabled={this.state.current_material._id ? false : true}
+              >
                 <FaTrash />
                 <p style={{ marginLeft: "0.5rem" }}>Delete</p>
               </button>
