@@ -1,9 +1,11 @@
 import React from "react";
 
-function ListRow(props) {
+const ListRow = (props) => {
+
   const handleMaterialClick = () => {
     props.setCurrentItem(props.material);
   };
+  
   return (
     <div className="container" onClick={handleMaterialClick}>
       <div
@@ -18,6 +20,6 @@ function ListRow(props) {
       </div>
     </div>
   );
-}
+};
 
 export default ListRow;

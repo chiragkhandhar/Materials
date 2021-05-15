@@ -57,6 +57,22 @@ export class Materials extends Component {
       color: "#44D7B6",
       cost: 0,
     };
+    this.setState({
+      data: this.state.data.push(object),
+    });
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      current_material: {
+        _id: this.state.current_material._id,
+        [event.target.name]: event.target.value,
+      },
+    });
+  };
+
+  handleSave = () => {
+    // Call API
   };
 
   render() {
@@ -96,51 +112,57 @@ export class Materials extends Component {
                   <>
                     {" "}
                     <div className="mv-col-1">
-                      <label for="name">Name</label>
+                      <label htmlFor="name">Name</label>
                       <input
                         id="name"
                         type="text"
                         name="name"
+                        onChange={this.handleChange}
                         value={current_material.name}
                       />
 
-                      <label for="volume">
+                      <label htmlFor="volume">
                         Volume (m<sup>3</sup>)
                       </label>
                       <input
                         id="volume"
                         type="number"
                         name="volume"
+                        onChange={this.handleChange}
                         value={current_material.volume}
                       />
 
-                      <label for="del-date">Delivery Date</label>
+                      <label htmlFor="delDate">Delivery Date</label>
                       <input
-                        id="del-date"
+                        id="delDate"
                         type="date"
-                        name="del-date"
+                        name="delDate"
                         value={current_material.delDate}
+                        onChange={this.handleChange}
                       />
                     </div>
                     <div className="mv-col-2">
-                      <label for="color">Color</label>
+                      <label htmlFor="color">Color</label>
                       <div className="color-container">
                         <input
                           id="color"
                           type="color"
                           name="color"
                           value={current_material.color}
+                          onChange={this.handleChange}
                         />
                       </div>
-                      <label for="cost">
+                      <label htmlFor="cost">
                         Cost (USD per m<sup>3</sup>)
                       </label>
                       <input
                         id="cost"
                         type="number"
                         name="cost"
+                        onChange={this.handleChange}
                         value={current_material.cost}
                       />
+                      <button className="save-btn">Save</button>
                     </div>
                   </>
                 )}
