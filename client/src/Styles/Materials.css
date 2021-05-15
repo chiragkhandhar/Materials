@@ -199,9 +199,14 @@ label {
   color: var(--white);
 }
 
-@media screen and (max-width: 781px) {
+@media screen and (max-width: 1350px) {
   .material-container {
+    min-height: 100vh;
     height: max-content;
+  }
+
+  .title {
+    text-align: center;
   }
 
   .btns {
