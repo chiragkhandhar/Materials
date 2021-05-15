@@ -1,7 +1,7 @@
 const { app, port } = require("./utils/admin");
 
 // Route variables
-const { getAllMaterials } = require("./routes/materials");
+const { getAllMaterials, addMaterial } = require("./routes/materials");
 
 // Connection
 app.listen(port, () => {
@@ -10,3 +10,4 @@ app.listen(port, () => {
 
 // Routes
 app.get("/api/materials", getAllMaterials);
+app.post("/api/material", addMaterial);

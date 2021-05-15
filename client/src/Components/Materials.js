@@ -23,11 +23,30 @@ export class Materials extends Component {
 
   api_getAllMaterials = () => {
     axios.get("/api/materials").then((materials) => {
-      console.log(materials.data);
       this.setState({
         data: materials.data,
       });
     });
+  };
+
+  api_addNewMaterial = (material) => {
+    axios
+      .post("/api/material", material)
+      .then((res) => {
+        let material = {
+          _id: res.data.data._id,
+          name: res.data.data.name,
+          volume: res.data.data.volume,
+          delDate: res.data.data.delDate,
+          color: res.data.data.color,
+          cost: res.data.data.cost,
+        };
+        this.api_getAllMaterials();
+        this.setCurrentItem(material);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   setCurrentItem = (material) => {
@@ -37,16 +56,14 @@ export class Materials extends Component {
   };
 
   addNewItem = () => {
-    const object = {
+    const material = {
       name: "",
       volume: 0,
       delDate: "",
       color: "#44D7B6",
       cost: 0,
     };
-    this.setState({
-      data: this.state.data.push(object),
-    });
+    this.api_addNewMaterial(material);
   };
 
   handleChange = (event) => {
