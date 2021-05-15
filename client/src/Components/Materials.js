@@ -103,7 +103,7 @@ export class Materials extends Component {
                 <FaPlus />
                 <p style={{ marginLeft: "0.5rem" }}>Add</p>
               </button>
-              <button className="delete-btn" disabled = {this.state.data.length === 0 ? true : false}>
+              <button className="delete-btn" disabled = {this.state.current_material._id ? false : true}>
                 <FaTrash />
                 <p style={{ marginLeft: "0.5rem" }}>Delete</p>
               </button>
