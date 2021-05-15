@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import axios from "axios";
 
 // Import Styles
 import "../Styles/Materials.css";
@@ -13,34 +14,20 @@ import ListRow from "./ListRow";
 export class Materials extends Component {
   state = {
     current_material: {},
-    data: [
-      {
-        _id: 1,
-        name: "Sand",
-        volume: 10000,
-        delDate: "2021-05-29",
-        color: "#FF0000",
-        cost: 0.1,
-      },
+    data: [],
+  };
 
-      {
-        _id: 2,
-        name: "Gravel",
-        volume: 23000,
-        delDate: "2021-05-29",
-        color: "#0000FF",
-        cost: 0.1,
-      },
+  componentDidMount = () => {
+    this.api_getAllMaterials();
+  };
 
-      {
-        _id: 3,
-        name: "Bricks",
-        volume: 53000,
-        delDate: "2021-05-29",
-        color: "#44D7B6",
-        cost: 0.1,
-      },
-    ],
+  api_getAllMaterials = () => {
+    axios.get("/api/materials").then((materials) => {
+      console.log(materials.data);
+      this.setState({
+        data: materials.data,
+      });
+    });
   };
 
   setCurrentItem = (material) => {

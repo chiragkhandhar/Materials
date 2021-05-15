@@ -11,7 +11,7 @@ const materialSchema = new Schema(
       type: Number,
     },
     delDate: {
-      type: Date,
+      type: String,
     },
     color: {
       type: String,
