@@ -1,8 +1,11 @@
 import React from "react";
 
 function ListRow(props) {
+  const handleMaterialClick = () => {
+    props.setCurrentItem(props.material);
+  };
   return (
-    <div className="container">
+    <div className="container" onClick={handleMaterialClick}>
       <div
         className="label-color"
         style={{ backgroundColor: `${props.material.color}` }}

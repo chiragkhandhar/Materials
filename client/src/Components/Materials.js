@@ -12,6 +12,7 @@ import ListRow from "./ListRow";
 
 export class Materials extends Component {
   state = {
+    current_material: {},
     data: [
       {
         _id: 1,
@@ -42,16 +43,31 @@ export class Materials extends Component {
     ],
   };
 
-  
+  setCurrentItem = (material) => {
+    this.setState({
+      current_material: material,
+    });
+  };
+
+  addNewItem = () => {
+    const object = {
+      name: "",
+      volume: 0,
+      delDate: "",
+      color: "#44D7B6",
+      cost: 0,
+    };
+  };
 
   render() {
+    const { current_material } = this.state;
     return (
       <Fragment>
         <div theme="cesium" className="material-container">
           <div className="component-wrapper">
             <p className="title">Materials</p>
             <div className="btns">
-              <button className="add-btn" >
+              <button className="add-btn" onClick={this.addNewItem}>
                 <FaPlus />
                 <p style={{ marginLeft: "0.5rem" }}>Add</p>
               </button>
@@ -65,35 +81,69 @@ export class Materials extends Component {
               <div className="material-list">
                 {this.state.data.length > 0 ? (
                   this.state.data.map((material) => (
-                    <ListRow key={material._id} material={material} />
+                    <ListRow
+                      key={material._id}
+                      material={material}
+                      setCurrentItem={this.setCurrentItem}
+                    />
                   ))
                 ) : (
                   <p>No Materials</p>
                 )}
               </div>
               <div className="material-view">
-                <div className="mv-col-1">
-                  <label for="name">Name</label>
-                  <input id="name" type="text" name="name" />
+                {current_material._id && (
+                  <>
+                    {" "}
+                    <div className="mv-col-1">
+                      <label for="name">Name</label>
+                      <input
+                        id="name"
+                        type="text"
+                        name="name"
+                        value={current_material.name}
+                      />
 
-                  <label for="volume">
-                    Volume (m<sup>3</sup>)
-                  </label>
-                  <input id="volume" type="number" name="volume" />
+                      <label for="volume">
+                        Volume (m<sup>3</sup>)
+                      </label>
+                      <input
+                        id="volume"
+                        type="number"
+                        name="volume"
+                        value={current_material.volume}
+                      />
 
-                  <label for="del-date">Delivery Date</label>
-                  <input id="del-date" type="date" name="del-date" />
-                </div>
-                <div className="mv-col-2">
-                  <label for="color">Color</label>
-                  <div className="color-container">
-                    <input id="color" type="color" name="color" />
-                  </div>
-                  <label for="cost">
-                    Cost (USD per m<sup>3</sup>)
-                  </label>
-                  <input id="cost" type="number" name="cost" />
-                </div>
+                      <label for="del-date">Delivery Date</label>
+                      <input
+                        id="del-date"
+                        type="date"
+                        name="del-date"
+                        value={current_material.delDate}
+                      />
+                    </div>
+                    <div className="mv-col-2">
+                      <label for="color">Color</label>
+                      <div className="color-container">
+                        <input
+                          id="color"
+                          type="color"
+                          name="color"
+                          value={current_material.color}
+                        />
+                      </div>
+                      <label for="cost">
+                        Cost (USD per m<sup>3</sup>)
+                      </label>
+                      <input
+                        id="cost"
+                        type="number"
+                        name="cost"
+                        value={current_material.cost}
+                      />
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
