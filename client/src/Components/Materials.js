@@ -140,7 +140,7 @@ export class Materials extends Component {
                     />
                   ))
                 ) : (
-                  <p>No Materials</p>
+                  <p className="material-list-msg">No Materials</p>
                 )}
               </div>
               <div className="material-view">

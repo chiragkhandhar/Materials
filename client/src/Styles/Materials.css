@@ -95,6 +95,16 @@
   margin-top: 2rem;
 }
 
+.material-list-msg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-style: italic;
+  color: var(--contrast-90p);
+  height: 100%;
+  margin: 0;
+}
+
 .material-list {
   height: 25rem;
   width: 20rem;
