@@ -15,7 +15,7 @@
 .material-container {
   display: flex;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   background-color: var(--skin);
 }
 
@@ -91,6 +91,7 @@
 .material-list-wrapper {
   display: flex;
   flex-direction: row;
+  height: max-content;
   flex-wrap: wrap;
   margin-top: 2rem;
 }
@@ -106,7 +107,7 @@
 }
 
 .material-list {
-  height: 25rem;
+  height: 314px;
   width: 20rem;
   border: 1px solid var(--contrast-90p);
   background-color: var(--contrast-0p);
@@ -127,7 +128,8 @@
   display: flex;
   flex-direction: row;
   width: 38rem;
-  height: 23rem;
+  min-height: calc(314px - 2rem);
+  height: fit-content;
   margin-left: 1rem;
   padding: 1rem;
   border-radius: 5px;

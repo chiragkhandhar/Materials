@@ -88,7 +88,7 @@ export class Materials extends Component {
       volume: 0,
       delDate: "",
       color: "#44D7B6",
-      cost: 0,
+      cost: 0.0,
     };
     this.api_addNewMaterial(material);
   };
@@ -106,7 +106,7 @@ export class Materials extends Component {
   calculateTotal = () => {
     let total = 0;
     this.state.data.length > 0 &&
-      this.state.data.map((material) => {
+      this.state.data.forEach((material) => {
         total += material.total;
       });
     total = total.toFixed(2);
@@ -169,7 +169,6 @@ export class Materials extends Component {
               <div className="material-view">
                 {current_material._id && (
                   <>
-                    {" "}
                     <div className="mv-col-1">
                       <label htmlFor="name">Name</label>
                       <input
