@@ -10,9 +10,12 @@
     "mongoose": "^5.12.9",
     "react-icons": "^4.2.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jsdoc": "^3.6.7"
+  },
   "scripts": {
     "start": "node index.js",
+    "docs": "jsdoc -c jsdoc.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

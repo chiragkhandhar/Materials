@@ -1,3 +1,17 @@
+/**
+ * @class Materials
+ * @classdesc This is the Materials Component file, which can be reused in other components by simply importing this file.
+ * @requires {@link ListRow}
+ * @example
+ * <ListRow
+ *    key={material._id}
+ *    material={material}
+ *    setCurrentItem={this.setCurrentItem}
+ * />
+ * @author Chirag Khandhar
+ * @hideconstructor
+ */
+
 import React, { Component, Fragment } from "react";
 import axios from "axios";
 
@@ -12,16 +26,37 @@ import { FaPlus, FaTrash } from "react-icons/fa";
 import ListRow from "./ListRow";
 
 export class Materials extends Component {
+  /**
+   * @memberof Materials
+   * @member
+   * @instance
+   * @property {Object} state - State variable of Material component.
+   * @property {Object} state.current_material - Holds the active material object.
+   * @property {Number} state.total - Holds the total price of all materials.
+   * @property {Array} state.data - Holds the list of Material objects from database.
+   */
   state = {
     current_material: {},
     total: 0,
     data: [],
   };
 
+  /**
+   * @function
+   * @memberof Materials
+   * @description React lifecycle method which gets called after the components are mounted successfully. It then calls ``api_getAllMaterials()``
+   * @instance
+   */
   componentDidMount = () => {
     this.api_getAllMaterials();
   };
 
+  /**
+   * @function
+   * @memberof Materials
+   * @description Calls API to get all the materials data from the database.
+   * @instance
+   */
   api_getAllMaterials = () => {
     axios
       .get("/api/materials")
@@ -33,6 +68,13 @@ export class Materials extends Component {
       .then(() => this.calculateTotal());
   };
 
+  /**
+   * @function
+   * @memberof Materials
+   * @description Calls API to add a new empty object to the database.
+   * @param {Object} material This is new object which will be added to the database.
+   * @instance
+   */
   api_addNewMaterial = (material) => {
     axios
       .post("/api/material", material)
@@ -53,6 +95,13 @@ export class Materials extends Component {
       });
   };
 
+  /**
+   * @function
+   * @memberof Materials
+   * @description Calls API to update an existing material object.
+   * @param {Object} material This is the updated object which will be overwritten in the database.
+   * @instance
+   */
   api_updateMaterial = (material) => {
     axios
       .post("/api/material/update", material)
@@ -64,6 +113,13 @@ export class Materials extends Component {
       });
   };
 
+  /**
+   * @function
+   * @memberof Materials
+   * @description Calls API to delete an existing material object.
+   * @param {Object} material This is the object that is to be deleted from the database.
+   * @instance
+   */
   api_deleteMaterial = (material) => {
     axios
       .post("/api/material/delete", material)
@@ -76,12 +132,25 @@ export class Materials extends Component {
       });
   };
 
+  /**
+   * @function
+   * @memberof Materials
+   * @description Helper function to set the ``current_material`` property of the component state.
+   * @param {Object} material This is the updated object to be set.
+   * @instance
+   */
   setCurrentItem = (material) => {
     this.setState({
       current_material: material,
     });
   };
 
+  /**
+   * @function
+   * @memberof Materials
+   * @description On-Click handler of the **Add Item** button. This function prepares a material object with default values and calls the corresponding API method ``api_addNewMaterial()``.
+   * @instance
+   */
   addNewItem = () => {
     const material = {
       name: "",
@@ -93,6 +162,13 @@ export class Materials extends Component {
     this.api_addNewMaterial(material);
   };
 
+  /**
+   * @function
+   * @memberof Materials
+   * @description On-Change handler of the input fields. It gets called everytime when any of the input fields changes.
+   * @param {Object} event This is the standard ``event`` object from React.
+   * @instance
+   */
   handleChange = (event) => {
     this.setState({
       current_material: {
@@ -103,6 +179,12 @@ export class Materials extends Component {
     });
   };
 
+  /**
+   * @function
+   * @memberof Materials
+   * @description Helper function to calculate the total price of all availabe materials.
+   * @instance
+   */
   calculateTotal = () => {
     let total = 0;
     this.state.data.length > 0 &&
@@ -115,10 +197,22 @@ export class Materials extends Component {
     });
   };
 
+  /**
+   * @function
+   * @memberof Materials
+   * @description On-Click handler of the **Save** button. This function calls corresponding API method ``api_updateMaterial()``
+   * @instance
+   */
   handleSave = () => {
     this.api_updateMaterial(this.state.current_material);
   };
 
+  /**
+   * @function
+   * @memberof Materials
+   * @description On-Click handler of the **Delete** button. This function calls corresponding API method ``api_deleteMaterial()``
+   * @instance
+   */
   handleDelete = () => {
     this.api_deleteMaterial(this.state.current_material);
   };
