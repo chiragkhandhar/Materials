@@ -114,10 +114,20 @@
   word-wrap: break-word;
 }
 
+.cost-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0.5rem 0 0.5rem;
+  color: var(--contrast-100p);
+}
+
 .material-view {
   display: flex;
   flex-direction: row;
   width: 38rem;
+  height: 23rem;
   margin-left: 1rem;
   padding: 1rem;
   border-radius: 5px;
@@ -219,6 +229,7 @@ label {
 
   .material-view {
     flex-wrap: wrap;
+    height: fit-content;
     margin-left: 0;
     margin-top: 1rem;
     margin-bottom: 2rem;

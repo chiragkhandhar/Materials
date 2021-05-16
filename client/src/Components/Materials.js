@@ -14,6 +14,7 @@ import ListRow from "./ListRow";
 export class Materials extends Component {
   state = {
     current_material: {},
+    total: 0,
     data: [],
   };
 
@@ -22,11 +23,14 @@ export class Materials extends Component {
   };
 
   api_getAllMaterials = () => {
-    axios.get("/api/materials").then((materials) => {
-      this.setState({
-        data: materials.data,
-      });
-    });
+    axios
+      .get("/api/materials")
+      .then((materials) => {
+        this.setState({
+          data: materials.data,
+        });
+      })
+      .then(() => this.calculateTotal());
   };
 
   api_addNewMaterial = (material) => {
@@ -99,6 +103,18 @@ export class Materials extends Component {
     });
   };
 
+  calculateTotal = () => {
+    let total = 0;
+    this.state.data.length > 0 &&
+      this.state.data.map((material) => {
+        total += material.total;
+      });
+    total = total.toFixed(2);
+    this.setState({
+      total: total,
+    });
+  };
+
   handleSave = () => {
     this.api_updateMaterial(this.state.current_material);
   };
@@ -108,7 +124,7 @@ export class Materials extends Component {
   };
 
   render() {
-    const { current_material } = this.state;
+    const { current_material, total } = this.state;
     return (
       <Fragment>
         <div theme="cesium" className="material-container">
@@ -130,19 +146,26 @@ export class Materials extends Component {
             </div>
 
             <div className="material-list-wrapper">
-              <div className="material-list">
-                {this.state.data.length > 0 ? (
-                  this.state.data.map((material) => (
-                    <ListRow
-                      key={material._id}
-                      material={material}
-                      setCurrentItem={this.setCurrentItem}
-                    />
-                  ))
-                ) : (
-                  <p className="material-list-msg">No Materials</p>
-                )}
+              <div>
+                <div className="material-list">
+                  {this.state.data.length > 0 ? (
+                    this.state.data.map((material) => (
+                      <ListRow
+                        key={material._id}
+                        material={material}
+                        setCurrentItem={this.setCurrentItem}
+                      />
+                    ))
+                  ) : (
+                    <p className="material-list-msg">No Materials</p>
+                  )}
+                </div>
+                <div className="cost-wrapper">
+                  <p> Total Cost: </p>
+                  <p>{`$ ${total}`}</p>
+                </div>
               </div>
+
               <div className="material-view">
                 {current_material._id && (
                   <>
