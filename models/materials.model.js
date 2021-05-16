@@ -19,6 +19,9 @@ const materialSchema = new Schema(
     cost: {
       type: Number,
     },
+    total : {
+      type: Number,
+    }
   },
   {
     timestamps: true,

@@ -19,6 +19,7 @@ exports.addMaterial = (request, response) => {
     delDate: request.body.delDate,
     color: request.body.color,
     cost: request.body.cost,
+    total: (request.body.volume * request.body.cost),
   };
 
   const newItem = new Material(material);
@@ -43,6 +44,7 @@ exports.updateMaterial = (request, response) => {
         delDate: request.body.delDate,
         color: request.body.color,
         cost: request.body.cost,
+        total: (request.body.volume * request.body.cost),
       },
     }
   )
