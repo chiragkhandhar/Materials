@@ -11,7 +11,7 @@
 **Setup Frontend**
 - Navigate to client directory `cd client`
 - Run `npm install` to install all frontend dependencies.
-- Run `npm start` to start the front end
+- Run `npm start` to start the front end (Prior to this, you must ensure your backend is running.)
 
 **Setup backend**
 
